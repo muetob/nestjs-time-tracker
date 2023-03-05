@@ -1,3 +1,3 @@
-import { CreateTaskDto } from "./create-task.dto";
+import { CreateTaskDto } from './create-task.dto';
 
-export interface UpdateTaskDto extends CreateTaskDto {}
+export class UpdateTaskDto extends CreateTaskDto {}
