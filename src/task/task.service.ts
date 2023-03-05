@@ -26,8 +26,10 @@ export class TaskService {
     return this.taskRepository.findOneBy({ id });
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  async update(id: number, updateTaskDto: UpdateTaskDto) {
+    await this.taskRepository.update(id, {
+      name: updateTaskDto.name,
+    });
   }
 
   async remove(id: number): Promise<void> {
