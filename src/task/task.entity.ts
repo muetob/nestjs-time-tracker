@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Expose } from "class-transformer";
 
 @Entity()
 export class Task {
@@ -7,4 +8,9 @@ export class Task {
 
   @Column()
   name: string;
+
+  @Expose()
+  get nameAndId(): string {
+    return `${this.id}:${this.name}`;
+  }
 }
