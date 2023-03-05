@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from "@nestjs/typeorm";
-import { Task } from "./task.entity";
-import { DataSource, Repository } from "typeorm";
-import { CreateTaskDto } from "./dto/create-task.dto";
-import { UpdateTaskDto } from "./dto/update-task.dto";
+import { InjectRepository } from '@nestjs/typeorm';
+import { Task } from './task.entity';
+import { DataSource, Repository } from 'typeorm';
+import { CreateTaskDto } from './dto/create-task.dto';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 @Injectable()
 export class TaskService {
@@ -14,17 +14,11 @@ export class TaskService {
   ) {}
 
   async create(createTaskDto: CreateTaskDto) {
-    const queryRunner = this.dataSource.createQueryRunner();
-
-    await queryRunner.connect();
-    await queryRunner.startTransaction();
-
-    const task = new Task();
-    task.name = createTaskDto.name;
-
-    await queryRunner.manager.save(task);
-
-    await queryRunner.commitTransaction();
+    await this.dataSource.transaction(async (manager) => {
+      const task = new Task();
+      task.name = createTaskDto.name;
+      await manager.save(task);
+    });
   }
 
   findAll(): Promise<Task[]> {
