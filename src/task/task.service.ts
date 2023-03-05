@@ -10,14 +10,11 @@ export class TaskService {
   constructor(
     @InjectRepository(Task)
     private taskRepository: Repository<Task>,
-    private dataSource: DataSource,
   ) {}
 
   async create(createTaskDto: CreateTaskDto) {
-    await this.dataSource.transaction(async (manager) => {
-      const task = new Task();
-      task.name = createTaskDto.name;
-      await manager.save(task);
+    await this.taskRepository.insert({
+      name: createTaskDto.name,
     });
   }
 
