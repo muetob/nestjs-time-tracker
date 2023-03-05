@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "root",
+    "password": "dev",
+    "host": "127.0.0.1",
+    "database": "time_tracker",
+    "port": "7778",
+    "schema": "public"
+  }
+}

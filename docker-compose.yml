@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  postgres.wt.internal:
+    image: postgres:latest
+    container_name: postgres.time-tracker.internal
+    volumes:
+      - postgres-data-time-tracker:/var/lib/postgresql/data
+
+    ports:
+      - '127.0.0.1:7778:5432'
+    environment:
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'dev'
+      POSTGRES_DB: 'time_tracker'
+
+volumes:
+  postgres-data-time-tracker:
