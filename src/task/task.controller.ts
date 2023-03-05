@@ -6,12 +6,11 @@ import {
   Patch,
   Param,
   Delete,
-  ClassSerializerInterceptor, UseInterceptors
-} from "@nestjs/common";
+} from '@nestjs/common';
 import { TaskService } from './task.service';
-import { CreateTaskDto } from "./dto/create-task.dto";
-import { UpdateTaskDto } from "./dto/update-task.dto";
-import { IdParams } from "./IdParams";
+import { CreateTaskDto } from './dto/create-task.dto';
+import { UpdateTaskDto } from './dto/update-task.dto';
+import { IdParams } from './IdParams';
 
 @Controller('task')
 export class TaskController {
