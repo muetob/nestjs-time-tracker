@@ -8,7 +8,7 @@ export const dbConfig = {
   username: 'root',
   password: 'dev',
   database: 'time_tracker',
-  entities: ['src/**/*.entity{ .ts,.js}'],
+  entities: ["dist/**/*.entity.js"],
   migrationsTableName: 'migrations',
 };
 

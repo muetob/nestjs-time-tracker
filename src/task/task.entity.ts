@@ -1,16 +1,16 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { Expose } from "class-transformer";
+import { Expose } from 'class-transformer';
 
-@Entity()
+@Entity({ name: 'tasks' })
 export class Task {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  title: string;
 
   @Expose()
-  get nameAndId(): string {
-    return `${this.id}:${this.name}`;
+  get titleAndId(): string {
+    return `${this.id}:${this.title}`;
   }
 }

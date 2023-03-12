@@ -9,8 +9,6 @@ import dbConfiguration from './config/db.config';
 
 @Module({
   imports: [
-    TaskModule,
-    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [dbConfiguration],
@@ -21,6 +19,8 @@ import dbConfiguration from './config/db.config';
         ...configService.get('database'),
       }),
     }),
+    TaskModule,
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],

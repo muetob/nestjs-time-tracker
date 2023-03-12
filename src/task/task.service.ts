@@ -14,7 +14,7 @@ export class TaskService {
 
   async create(createTaskDto: CreateTaskDto) {
     await this.taskRepository.insert({
-      name: createTaskDto.name,
+      title: createTaskDto.title,
     });
   }
 
@@ -28,7 +28,7 @@ export class TaskService {
 
   async update(id: number, updateTaskDto: UpdateTaskDto) {
     await this.taskRepository.update(id, {
-      name: updateTaskDto.name,
+      title: updateTaskDto.title,
     });
   }
 
