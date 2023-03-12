@@ -4,6 +4,12 @@
   "sourceRoot": "src",
   "compilerOptions": {
     "deleteOutDir": true,
-    "assets": [{"include": "../config/*.yaml", "outDir": "./dist/config"}]
+    "watchAssets": false,
+    "assets": [
+      {"include": "../config/*.yaml",
+        "outDir": "./dist/config"},
+      {"include":  "../config/ormconfig.json",
+        "outDir": "./dist"}
+    ]
   }
 }

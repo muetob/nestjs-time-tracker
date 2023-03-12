@@ -2,30 +2,24 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TaskModule } from './task/task.module';
-import { ConfigModule, ConfigService } from "@nestjs/config";
-import configuration from './config/configuration';
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { Task } from "./task/task.entity";
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ScheduleModule } from '@nestjs/schedule';
+import dbConfiguration from './config/db.config';
 
 @Module({
   imports: [
     TaskModule,
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
-      load: [configuration],
+      isGlobal: true,
+      load: [dbConfiguration],
     }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (config: ConfigService) => ({
-        type: 'postgres',
-        host: config.get('db.postgres.host'),
-        port: +config.get('db.postgres.port'),
-        username: config.get('db.postgres.user'),
-        password: config.get('db.postgres.password'),
-        database: config.get('db.postgres.database'),
-        synchronize: true,
-        autoLoadEntities: true
-      }),
       inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        ...configService.get('database'),
+      }),
     }),
   ],
   controllers: [AppController],
