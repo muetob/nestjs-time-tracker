@@ -5,6 +5,7 @@ import { TaskModule } from './task/task.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ScheduleModule } from '@nestjs/schedule';
+import { UserModule } from './user/user.module';
 import dbConfiguration from './config/db.config';
 
 @Module({
@@ -21,6 +22,7 @@ import dbConfiguration from './config/db.config';
     }),
     TaskModule,
     ScheduleModule.forRoot(),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
